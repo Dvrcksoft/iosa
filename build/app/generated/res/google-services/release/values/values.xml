@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">554032196127-g2murou4b49ale8va5tj5vaf25navnp6.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">554032196127</string>
+    <string name="google_api_key" translatable="false">AIzaSyAcdBUKem1tjANVLn5SK04Slg77iJ4e4tQ</string>
+    <string name="google_app_id" translatable="false">1:554032196127:android:04deb36d6a21892798c32a</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAcdBUKem1tjANVLn5SK04Slg77iJ4e4tQ</string>
+    <string name="google_storage_bucket" translatable="false">trade-hive-signals.appspot.com</string>
+    <string name="project_id" translatable="false">trade-hive-signals</string>
+</resources>

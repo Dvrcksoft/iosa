@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "554032196127",
+    "project_id": "trade-hive-signals",
+    "storage_bucket": "trade-hive-signals.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554032196127:android:04deb36d6a21892798c32a",
+        "android_client_info": {
+          "package_name": "com.tradehive.signals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554032196127-5nvs7ophgn9eqsiij57poelubvs6rthq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tradehive.signals",
+            "certificate_hash": "0912bf9f0607624c536f9bb630b3cfb50960e4d1"
+          }
+        },
+        {
+          "client_id": "554032196127-ontm4fu9eko64kd2vumg61clthld2gf9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tradehive.signals",
+            "certificate_hash": "7460fef1b67f3abaec8f2d382f346c242380c20b"
+          }
+        },
+        {
+          "client_id": "554032196127-g2murou4b49ale8va5tj5vaf25navnp6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcdBUKem1tjANVLn5SK04Slg77iJ4e4tQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554032196127-g2murou4b49ale8va5tj5vaf25navnp6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>554032196127-0db7eebckaomkl74m79n5f80d3j4u5h4.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.554032196127-0db7eebckaomkl74m79n5f80d3j4u5h4</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>554032196127-5nvs7ophgn9eqsiij57poelubvs6rthq.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD3Zaix1hgJUQcY8Kd0wzKm19_J1AnuhZs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>554032196127</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.tradehive.signals</string>
+	<key>PROJECT_ID</key>
+	<string>trade-hive-signals</string>
+	<key>STORAGE_BUCKET</key>
+	<string>trade-hive-signals.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:554032196127:ios:37fe30cc5f4d3f7498c32a</string>
+</dict>
+</plist>

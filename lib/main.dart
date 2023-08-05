@@ -131,3 +131,32 @@ class MyHttpOverrides extends HttpOverrides {
     return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }
+
+class listImage {
+//fungsi untuk return image list carousel
+List<Widget> listImage(List list) {
+  var obj = list.map((url) {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+              child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => SliderShowFullmages(
+                      listImagesModel: list, current: _current)));
+            },
+            child: Image.asset(
+              url,
+              fit: BoxFit.fill,
+              height: 255,
+            ),
+          ))
+        ],
+      ),
+    );
+  }).toList();
+  return obj;
+}
+}

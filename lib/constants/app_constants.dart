@@ -5,5 +5,5 @@ class AppConstants {
       dotenv.get('REVENUECAT_ANDROID_KEY', fallback: 't');
   static String REVENUECAT_IOS_KEY =
       dotenv.get('REVENUECAT_IOS_KEY', fallback: 't');
-  static String APP_NAME = dotenv.get('APP_NAME', fallback: 'TradeHive');
+  static String APP_NAME = dotenv.get('APP_NAME', fallback: 'Trade Hive Signals');
 }

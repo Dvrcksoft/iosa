@@ -11,7 +11,6 @@ import 'package:signalbyt/models/auth_user.dart';
 import 'package:signalbyt/models_providers/app_controls_provider.dart';
 import 'package:signalbyt/models_providers/auth_provider.dart';
 import 'package:signalbyt/models_services/firebase_auth_service.dart';
-import 'package:signalbyt/pages/subsciption/subscription_page.dart';
 import 'package:signalbyt/pages/user/support_page.dart';
 import 'package:signalbyt/constants/app_colors.dart';
 
@@ -62,35 +61,31 @@ class _MyAccountPageState extends State<MyAccountPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(child: Text(authUser?.email ?? ''), margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8)),
+                  Container(
+                      child: Text(authUser?.email ?? ''),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 8)),
                   SizedBox(height: 8),
                 ],
               ),
-            ZCard(
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                padding: EdgeInsets.zero,
-                color: Colors.transparent,
-                onTap: () => Get.to(() => SubscriptionPage(), fullscreenDialog: true),
-                child: Row(
-                  children: [
-                    SvgPicture.asset('assets/svg/money.svg', colorFilter: ColorFilter.mode(appColorBlue, BlendMode.srcIn), height: 20, width: 20),
-                    SizedBox(width: 16),
-                    Text('My Subscription', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                    Spacer(),
-                    Icon(Icons.arrow_forward_ios, size: 16),
-                  ],
-                )),
             Divider(height: 10),
             ZCard(
                 margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 padding: EdgeInsets.zero,
                 color: Colors.transparent,
-                onTap: () => Get.to(() => SupportPage(), fullscreenDialog: true),
+                onTap: () =>
+                    Get.to(() => SupportPage(), fullscreenDialog: true),
                 child: Row(
                   children: [
-                    SvgPicture.asset('assets/svg/support.svg', colorFilter: ColorFilter.mode(appColorPink, BlendMode.srcIn), height: 20, width: 20),
+                    SvgPicture.asset('assets/svg/support.svg',
+                        colorFilter:
+                            ColorFilter.mode(appColorPink, BlendMode.srcIn),
+                        height: 20,
+                        width: 20),
                     SizedBox(width: 16),
-                    Text('Support', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                    Text('Support',
+                        style: TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.w600)),
                     Spacer(),
                     Icon(Icons.arrow_forward_ios, size: 16),
                   ],
@@ -103,9 +98,14 @@ class _MyAccountPageState extends State<MyAccountPage> {
                 child: Row(
                   children: [
                     SvgPicture.asset('assets/svg/notification.svg',
-                        colorFilter: ColorFilter.mode(appColorYellow, BlendMode.srcIn), height: 20, width: 20),
+                        colorFilter:
+                            ColorFilter.mode(appColorYellow, BlendMode.srcIn),
+                        height: 20,
+                        width: 20),
                     SizedBox(width: 16),
-                    Text('Enable notifications', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                    Text('Enable notifications',
+                        style: TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.w600)),
                     Spacer(),
                     Switch(
                         value: authUser?.isNotificationsEnabled ?? true,
@@ -123,9 +123,13 @@ class _MyAccountPageState extends State<MyAccountPage> {
                 child: Row(
                   children: [
                     SvgPicture.asset('assets/svg/exchange.svg',
-                        colorFilter: ColorFilter.mode(getIconColor(1), BlendMode.srcIn), height: 20, width: 20),
+                        colorFilter:
+                            ColorFilter.mode(getIconColor(1), BlendMode.srcIn),
+                        height: 20,
+                        width: 20),
                     SizedBox(width: 16),
-                    Text('Enable dark mode', style: TextStyle(fontWeight: FontWeight.w600)),
+                    Text('Enable dark mode',
+                        style: TextStyle(fontWeight: FontWeight.w600)),
                     Spacer(),
                     Switch(
                         value: themeProvider.themeMode == ThemeMode.dark,
@@ -148,16 +152,24 @@ class _MyAccountPageState extends State<MyAccountPage> {
                       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       padding: EdgeInsets.zero,
                       onTap: () async {
-                        Provider.of<AppProvider>(context, listen: false).cancleAllStreams();
-                        await Provider.of<AuthProvider>(context, listen: false).signOut();
-                        await Provider.of<AuthProvider>(context, listen: false).initReload();
+                        Provider.of<AppProvider>(context, listen: false)
+                            .cancleAllStreams();
+                        await Provider.of<AuthProvider>(context, listen: false)
+                            .signOut();
+                        await Provider.of<AuthProvider>(context, listen: false)
+                            .initReload();
                       },
                       child: Row(
                         children: [
                           SvgPicture.asset('assets/svg/notification.svg',
-                              colorFilter: ColorFilter.mode(appColorError, BlendMode.srcIn), height: 20, width: 20),
+                              colorFilter: ColorFilter.mode(
+                                  appColorError, BlendMode.srcIn),
+                              height: 20,
+                              width: 20),
                           SizedBox(width: 16),
-                          Text('Sign out', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                          Text('Sign out',
+                              style: TextStyle(
+                                  fontSize: 13, fontWeight: FontWeight.w600)),
                         ],
                       )),
                   Divider(height: 20),
@@ -179,12 +191,15 @@ class _MyAccountPageState extends State<MyAccountPage> {
       children: [
         Row(),
         SizedBox(height: 16),
-        Container(margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16), child: Text('Want to sync between devices?')),
+        Container(
+            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Text('Want to sync between devices?')),
         if (Platform.isIOS)
           ZCard(
               onTap: () async {
                 try {
-                  AppControlsProvider appControlsProvider = Provider.of<AppControlsProvider>(context, listen: false);
+                  AppControlsProvider appControlsProvider =
+                      Provider.of<AppControlsProvider>(context, listen: false);
                   final appControls = appControlsProvider.appControls;
 
                   User? fbUser = FirebaseAuth.instance.currentUser;
@@ -193,11 +208,15 @@ class _MyAccountPageState extends State<MyAccountPage> {
                   await FirebaseAuthService.signInWithApple();
 
                   if (jsonWebToken != null) {
-                    ApiAuthUserService.deleteAccountGoogleAppleSignin(apiBaseUrl: appControls.adminUrl, jsonWebToken: jsonWebToken);
+                    ApiAuthUserService.deleteAccountGoogleAppleSignin(
+                        apiBaseUrl: appControls.adminUrl,
+                        jsonWebToken: jsonWebToken);
                   }
 
-                  Provider.of<AppProvider>(context, listen: false).cancleAllStreams();
-                  await Provider.of<AuthProvider>(context, listen: false).initReload();
+                  Provider.of<AppProvider>(context, listen: false)
+                      .cancleAllStreams();
+                  await Provider.of<AuthProvider>(context, listen: false)
+                      .initReload();
                 } catch (e) {
                   print(e);
                 }
@@ -209,14 +228,16 @@ class _MyAccountPageState extends State<MyAccountPage> {
                 children: [
                   Image.asset('assets/images/apple.png', width: 20, height: 20),
                   SizedBox(width: 4),
-                  Text('Sign in with Apple', style: TextStyle(color: Colors.black, fontSize: 13))
+                  Text('Sign in with Apple',
+                      style: TextStyle(color: Colors.black, fontSize: 13))
                 ],
               )),
         SizedBox(height: 16),
         ZCard(
             onTap: () async {
               try {
-                AppControlsProvider appControlsProvider = Provider.of<AppControlsProvider>(context, listen: false);
+                AppControlsProvider appControlsProvider =
+                    Provider.of<AppControlsProvider>(context, listen: false);
                 final appControls = appControlsProvider.appControls;
 
                 User? fbUser = FirebaseAuth.instance.currentUser;
@@ -225,11 +246,15 @@ class _MyAccountPageState extends State<MyAccountPage> {
                 await FirebaseAuthService.signInWithGoogle();
 
                 if (jsonWebToken != null) {
-                  ApiAuthUserService.deleteAccountGoogleAppleSignin(apiBaseUrl: appControls.adminUrl, jsonWebToken: jsonWebToken);
+                  ApiAuthUserService.deleteAccountGoogleAppleSignin(
+                      apiBaseUrl: appControls.adminUrl,
+                      jsonWebToken: jsonWebToken);
                 }
 
-                Provider.of<AppProvider>(context, listen: false).cancleAllStreams();
-                await Provider.of<AuthProvider>(context, listen: false).initReload();
+                Provider.of<AppProvider>(context, listen: false)
+                    .cancleAllStreams();
+                await Provider.of<AuthProvider>(context, listen: false)
+                    .initReload();
               } catch (e) {
                 print(e);
               }
@@ -241,7 +266,8 @@ class _MyAccountPageState extends State<MyAccountPage> {
               children: [
                 Image.asset('assets/images/google.png', width: 20, height: 20),
                 SizedBox(width: 4),
-                Text('Sign in with Google', style: TextStyle(color: Colors.black, fontSize: 13))
+                Text('Sign in with Google',
+                    style: TextStyle(color: Colors.black, fontSize: 13))
               ],
             )),
       ],
@@ -262,13 +288,16 @@ class _buildFollowUs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppControlsProvider appControlsProvider = Provider.of<AppControlsProvider>(context);
+    AppControlsProvider appControlsProvider =
+        Provider.of<AppControlsProvider>(context);
     final appControls = appControlsProvider.appControls;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 16),
-        Container(margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8), child: Text('Links:')),
+        Container(
+            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text('Links:')),
         Column(
           children: [
             if (appControls.linkGooglePlay != '')
@@ -354,7 +383,13 @@ class ZSocialMedia extends StatelessWidget {
   final Color color;
   final Function() onTap;
 
-  ZSocialMedia({Key? key, required this.icon, required this.text, required this.color, required this.onTap}) : super(key: key);
+  ZSocialMedia(
+      {Key? key,
+      required this.icon,
+      required this.text,
+      required this.color,
+      required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -363,7 +398,8 @@ class ZSocialMedia extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
+        decoration:
+            BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
         child: Row(
           children: [Icon(icon), SizedBox(width: 8), Text(text)],
         ),

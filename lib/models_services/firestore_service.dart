@@ -4,6 +4,9 @@ import 'package:signalbyt/models/app_controls_public.dart';
 import 'package:signalbyt/models/news_aggr.dart';
 import 'package:signalbyt/models/notification_aggr.dart';
 import 'package:signalbyt/models/post_aggr.dart';
+import 'package:signalbyt/models/anal_aggr.dart';
+import 'package:signalbyt/models/srat_aggr.dart';
+import 'package:signalbyt/models/lessn_aggr.dart';
 import 'package:signalbyt/models/support.dart';
 import 'package:signalbyt/models/video_lesson_aggr.dart';
 
@@ -29,6 +32,21 @@ class FirestoreService {
   static Stream<PostAggr> streamPostsAggr() {
     var ref = FirebaseFirestore.instance.collection('postsAggr').doc('posts').snapshots();
     return ref.map((doc) => PostAggr.fromJson({...?doc.data(), "id": doc.id}));
+  }
+
+  static Stream<AnalAggr> streamAnalsAggr() {
+    var ref = FirebaseFirestore.instance.collection('analsAggr').doc('anals').snapshots();
+    return ref.map((doc) => AnalAggr.fromJson({...?doc.data(), "id": doc.id}));
+  }
+
+  static Stream<SratAggr> streamSratsAggr() {
+    var ref = FirebaseFirestore.instance.collection('sratsAggr').doc('srats').snapshots();
+    return ref.map((doc) => SratAggr.fromJson({...?doc.data(), "id": doc.id}));
+  }
+
+  static Stream<LessnAggr> streamLessnsAggr() {
+    var ref = FirebaseFirestore.instance.collection('lessnsAggr').doc('lessns').snapshots();
+    return ref.map((doc) => LessnAggr.fromJson({...?doc.data(), "id": doc.id}));
   }
 
   static Stream<VideoLessonAggr> streamVideoLessonAggr() {

@@ -45,6 +45,14 @@
             {
               "client_id": "554032196127-g2murou4b49ale8va5tj5vaf25navnp6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "554032196127-0db7eebckaomkl74m79n5f80d3j4u5h4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tradehive.signals",
+                "app_store_id": "6450733317"
+              }
             }
           ]
         }

@@ -5,6 +5,9 @@ import 'package:signalbyt/models/announcement_aggr.dart';
 import 'package:signalbyt/models/auth_user.dart';
 import 'package:signalbyt/models/notification_aggr.dart';
 import 'package:signalbyt/models/post_aggr.dart';
+import 'package:signalbyt/models/anal_aggr.dart';
+import 'package:signalbyt/models/srat_aggr.dart';
+import 'package:signalbyt/models/lessn_aggr.dart';
 import 'package:signalbyt/models/signal_aggr_open.dart';
 import 'package:signalbyt/models/video_lesson_aggr.dart';
 import 'package:signalbyt/models_services/firestore_service.dart';
@@ -26,6 +29,9 @@ class AppProvider with ChangeNotifier {
     if (_authProvider?.authUser != null && rerun) {
       streamAggrNews();
       streamPostsAggr();
+      streamAnalsAggr();
+      streamSratsAggr();
+      streamLessnsAggr();
       streamVideoLessonAggr();
       streamAnnoucementsAggr();
       streamSignalsAggrOpen();
@@ -39,6 +45,9 @@ class AppProvider with ChangeNotifier {
     if (_authProvider?.authUser == null) {
       cancleStreamAggrNews();
       cancleStreamPost();
+      cancleStreamAnal();
+      cancleStreamSrat();
+      cancleStreamLessn();
       cancleStreamVideoLessons();
       cancleStreamAnnoucements();
       cancleStreamSignalsAggrOpen();
@@ -58,6 +67,9 @@ class AppProvider with ChangeNotifier {
   void cancleAllStreams() {
     cancleStreamAggrNews();
     cancleStreamPost();
+    cancleStreamAnal();
+    cancleStreamSrat();
+    cancleStreamLessn();
     cancleStreamVideoLessons();
     cancleStreamAnnoucements();
     notifyListeners();
@@ -142,6 +154,58 @@ class AppProvider with ChangeNotifier {
   void cancleStreamPost() {
     _streamSubscriptionPost?.cancel();
   }
+
+    /* -------------------------------- NOTE Anal ------------------------------- */
+  List<Anal> _anals = [];
+  List<Anal> get anals => _anals;
+  StreamSubscription<AnalAggr>? _streamSubscriptionAnal;
+
+  void streamAnalsAggr() {
+    var res = FirestoreService.streamAnalsAggr();
+    _streamSubscriptionAnal = res.listen((event) {
+      _anals = event.data;
+      notifyListeners();
+    });
+  }
+
+  void cancleStreamAnal() {
+    _streamSubscriptionAnal?.cancel();
+  }
+
+/* -------------------------------- NOTE Strategy ------------------------------- */
+  List<Srat> _srats = [];
+  List<Srat> get srats => _srats;
+  StreamSubscription<SratAggr>? _streamSubscriptionSrat;
+
+  void streamSratsAggr() {
+    var res = FirestoreService.streamSratsAggr();
+    _streamSubscriptionSrat = res.listen((event) {
+      _srats = event.data;
+      notifyListeners();
+    });
+  }
+
+  void cancleStreamSrat() {
+    _streamSubscriptionSrat?.cancel();
+  }
+
+  /* -------------------------------- NOTE Lesson ------------------------------- */
+  List<Lessn> _lessns = [];
+  List<Lessn> get lessns => _lessns;
+  StreamSubscription<LessnAggr>? _streamSubscriptionLessn;
+
+  void streamLessnsAggr() {
+    var res = FirestoreService.streamLessnsAggr();
+    _streamSubscriptionLessn = res.listen((event) {
+      _lessns = event.data;
+      notifyListeners();
+    });
+  }
+
+  void cancleStreamLessn() {
+    _streamSubscriptionLessn?.cancel();
+  }
+
 
   /* -------------------------------- NOTE Video ------------------------------- */
   List<VideoLesson> _videoLessons = [];

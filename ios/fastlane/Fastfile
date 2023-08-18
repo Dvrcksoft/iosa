@@ -5,7 +5,7 @@ default_platform(:ios)
 platform :ios do
 
   before_all do
-    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+		ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "bwmr-kncm-fnym-qpek"
   end
 
   desc "upload meta"
@@ -21,7 +21,9 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :test_flight do
     build_app(clean: true, workspace: "Runner.xcworkspace", scheme: "Runner")
-    upload_to_testflight(skip_waiting_for_build_processing: true, changelog: "Bug fixes and ui improvements")
+    upload_to_testflight(
+       skip_waiting_for_build_processing: true
+    )
   end
 
 
@@ -38,15 +40,8 @@ platform :ios do
   end
 
   after_all do |lane|
-    slack(
-      message: "Build uploaded"
-    )
   end
 
   error do |lane, exception|
-    slack(
-      message: exception.message,
-      success:false
-    )
   end
 end

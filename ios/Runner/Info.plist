@@ -7,7 +7,7 @@
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
-		<string>TradeHive</string>
+		<string>Signally</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
@@ -21,7 +21,7 @@
 			<string>ar</string>
 		</array>
 		<key>CFBundleName</key>
-		<string>TradeHive</string>
+		<string>Signally</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>
@@ -35,7 +35,7 @@
 				<string>Editor</string>
 				<key>CFBundleURLSchemes</key>
 				<array>
-					<string>com.googleusercontent.apps.554032196127-0db7eebckaomkl74m79n5f80d3j4u5h4</string>
+					<string>com.googleusercontent.apps.42145237568-vvba6me7153jkgqbofpujd82rmf98fln</string>
 				</array>
 			</dict>
 		</array>
@@ -64,20 +64,15 @@
 		<string>Take photos so users can upload a profile picturs</string>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Take photos so users can upload a profile pictur</string>
-		<key>UIApplicationSupportsIndirectInputEvents</key>
-		<true/>
 		<key>UIBackgroundModes</key>
 		<array>
 			<string>fetch</string>
-			<string>processing</string>
 			<string>remote-notification</string>
 		</array>
 		<key>UILaunchStoryboardName</key>
-		<string>Main.storyboard</string>
+		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
-		<key>UIStatusBarHidden</key>
-		<true/>
 		<key>UISupportedInterfaceOrientations</key>
 		<array>
 			<string>UIInterfaceOrientationPortrait</string>
@@ -93,5 +88,9 @@
 		</array>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
+		<key>UIStatusBarHidden</key>
+		<true/>
+		<key>UIApplicationSupportsIndirectInputEvents</key>
+		<true/>
 	</dict>
 </plist>

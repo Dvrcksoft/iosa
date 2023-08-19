@@ -12,6 +12,7 @@ import 'package:signalbyt/models_providers/app_controls_provider.dart';
 import 'package:signalbyt/models_providers/auth_provider.dart';
 import 'package:signalbyt/models_services/firebase_auth_service.dart';
 import 'package:signalbyt/pages/subsciption/subscription_page.dart';
+import 'package:signalbyt/pages/user/notifications_page.dart';
 import 'package:signalbyt/pages/user/support_page.dart';
 import 'package:signalbyt/constants/app_colors.dart';
 
@@ -66,21 +67,6 @@ class _MyAccountPageState extends State<MyAccountPage> {
                   SizedBox(height: 8),
                 ],
               ),
-            ZCard(
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                padding: EdgeInsets.zero,
-                color: Colors.transparent,
-                borderRadiusColor: Colors.transparent,
-                onTap: () => Get.to(() => SubscriptionPage(), fullscreenDialog: true),
-                child: Row(
-                  children: [
-                    SvgPicture.asset('assets/svg/money.svg', colorFilter: ColorFilter.mode(appColorBlue, BlendMode.srcIn), height: 20, width: 20),
-                    SizedBox(width: 16),
-                    Text('My Subscription', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                    Spacer(),
-                    Icon(Icons.arrow_forward_ios, size: 16),
-                  ],
-                )),
             Divider(height: 10),
             ZCard(
                 margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -93,6 +79,22 @@ class _MyAccountPageState extends State<MyAccountPage> {
                     SvgPicture.asset('assets/svg/support.svg', colorFilter: ColorFilter.mode(appColorPink, BlendMode.srcIn), height: 20, width: 20),
                     SizedBox(width: 16),
                     Text('Support', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                    Spacer(),
+                    Icon(Icons.arrow_forward_ios, size: 16),
+                  ],
+                )),
+            Divider(height: 6),
+            ZCard(
+                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding: EdgeInsets.zero,
+                color: Colors.transparent,
+                borderRadiusColor: Colors.transparent,
+                onTap: () => Get.to(() => NotificationsPage(), fullscreenDialog: true),
+                child: Row(
+                  children: [
+                    SvgPicture.asset('assets/svg/notification.svg', colorFilter: ColorFilter.mode(appColorYellow, BlendMode.srcIn), height: 20, width: 20),
+                    SizedBox(width: 16),
+                    Text('All Alerts', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
                     Spacer(),
                     Icon(Icons.arrow_forward_ios, size: 16),
                   ],
@@ -179,7 +181,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     if (authProvider.authUser?.isAnonymous == false) return Container();
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(),
         SizedBox(height: 16),
@@ -269,10 +271,10 @@ class _buildFollowUs extends StatelessWidget {
     AppControlsProvider appControlsProvider = Provider.of<AppControlsProvider>(context);
     final appControls = appControlsProvider.appControls;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(height: 16),
-        Container(margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8), child: Text('Links:')),
+        Container(margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8), child: Text('Terms & Privacy')),
         Column(
           children: [
             if (appControls.linkGooglePlay != '')
@@ -295,13 +297,6 @@ class _buildFollowUs extends StatelessWidget {
                 color: appColorPink,
                 icon: AntDesign.instagram,
                 onTap: () => ZLaunchUrl.launchUrl(appControls.linkInstagram),
-              ),
-            if (appControls.linkTelegram != '')
-              ZSocialMedia(
-                text: 'Telegram',
-                color: appColorBlue,
-                icon: AntDesign.message1,
-                onTap: () => ZLaunchUrl.launchUrl(appControls.linkTelegram),
               ),
             if (appControls.linkWhatsapp != '')
               ZSocialMedia(
@@ -345,6 +340,13 @@ class _buildFollowUs extends StatelessWidget {
                 icon: AntDesign.eyeo,
                 onTap: () => ZLaunchUrl.launchUrl(appControls.linkPivacy),
               ),
+              if (appControls.linkTelegram != '')
+              ZSocialMedia(
+                text: 'Telegram',
+                color: appColorBlue,
+                icon: AntDesign.message1,
+                onTap: () => ZLaunchUrl.launchUrl(appControls.linkTelegram),
+              ),
           ],
         ),
       ],
@@ -367,7 +369,7 @@ class ZSocialMedia extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(15)),
         child: Row(
           children: [Icon(icon), SizedBox(width: 8), Text(text)],
         ),

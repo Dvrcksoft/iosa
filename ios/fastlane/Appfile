@@ -1,4 +1,4 @@
-app_identifier("com.codememory.signally") # The bundle identifier of your app
+app_identifier("com.tradehive.signals") # The bundle identifier of your app
 apple_id("codememory101@gmail.com") # Your Apple Developer Portal username
 
 itc_team_id("120272036") # App Store Connect Team ID

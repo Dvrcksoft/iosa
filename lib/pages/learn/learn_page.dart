@@ -3,11 +3,15 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:signalbyt/components/z_card.dart';
 import 'package:signalbyt/models/post_aggr.dart';
+import 'package:signalbyt/models/anal_aggr.dart';
+import 'package:signalbyt/models/srat_aggr.dart';
+import 'package:signalbyt/models/lessn_aggr.dart';
 import 'package:signalbyt/models/video_lesson_aggr.dart';
 import 'package:signalbyt/models_providers/app_provider.dart';
 import 'package:signalbyt/pages/learn/post_details_page.dart';
-import 'package:signalbyt/pages/learn/posts_page.dart';
-import 'package:signalbyt/pages/learn/videos_page.dart';
+import 'package:signalbyt/pages/learn/anal_details_page.dart';
+import 'package:signalbyt/pages/learn/srat_details_page.dart';
+import 'package:signalbyt/pages/learn/lessn_details_page.dart';
 import 'package:signalbyt/utils/z_format.dart';
 
 import '../../components/z_image_display.dart';
@@ -21,9 +25,12 @@ class LearnPage extends StatefulWidget {
   State<LearnPage> createState() => _LearnPageState();
 }
 
-class _LearnPageState extends State<LearnPage> {
+class _LearnPageState extends State<LearnPage> with TickerProviderStateMixin {
+  late TabController _controller;
+
   @override
   void initState() {
+    _controller = TabController(length: 4, vsync: this);
     super.initState();
   }
 
@@ -31,41 +38,77 @@ class _LearnPageState extends State<LearnPage> {
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
     final posts = appProvider.posts;
-    final videos = appProvider.videoLessons;
-    final postsFirst5 = posts.length > 5 ? posts.sublist(0, 5) : posts;
-    final videosFirst5 = videos.length > 5 ? videos.sublist(0, 5) : videos;
+    final anals = appProvider.anals;
+    final srats = appProvider.srats;
+    final lessns = appProvider.lessns;
+    final videoLessons = appProvider.videoLessons;
     return Scaffold(
-      body: ListView(
-        children: [
-          SizedBox(height: 16),
-          _buildHeading(title: 'Posts', onTap: () => Get.to(() => PostsPage(posts: posts), fullscreenDialog: true), length: posts.length),
-          Column(children: [for (var post in postsFirst5) PostCard(post: post)]),
-          SizedBox(height: 16),
-          _buildHeading(title: 'Videos', onTap: () => Get.to(() => VideosPage(videos: videos), fullscreenDialog: true), length: videos.length),
-          Column(children: [for (var video in videosFirst5) VideoCard(videoLesson: video)]),
-          SizedBox(height: 16),
-        ],
+      appBar: AppBar(
+        toolbarHeight: 0,
+        bottom: TabBar(
+          controller: _controller,
+          indicatorColor: appColorYellow,
+          labelColor: appColorYellow,
+          tabs: [
+            Tab(text: 'Blogs'),
+            Tab(text: 'Analytics'),
+            Tab(text: 'Strategy'),
+            Tab(text: 'Lessons'),
+          ],
+        ),
       ),
-    );
-  }
-
-  Container _buildHeading({required String title, required Function() onTap, required int length}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 1, horizontal: 16),
-      child: Row(
-        children: [
-          Text(title, style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: AppCOLORS.yellow)),
-          Spacer(),
-          if (length > 4)
-            ZCard(
-              margin: EdgeInsets.symmetric(),
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              child: Text('View all'),
-              borderRadiusColor: AppCOLORS.yellow,
-              onTap: onTap,
-            ),
-        ],
-      ),
+      body: TabBarView(controller: _controller, children: [
+        ListView.builder(
+          itemCount: posts.length,
+          itemBuilder: ((context, index) => Column(
+                children: [
+                  if (index == 0) SizedBox(height: 8),
+                  PostCard(post: posts[index]),
+                  if (index == videoLessons.length - 1) SizedBox(height: 16),
+                ],
+              )),
+        ),
+        ListView.builder(
+          itemCount: anals.length,
+          itemBuilder: ((context, index) => Column(
+                children: [
+                  if (index == 0) SizedBox(height: 8),
+                  AnalCard(anal: anals[index]),
+                  if (index == videoLessons.length - 1) SizedBox(height: 16),
+                ],
+              )),
+        ),
+        ListView.builder(
+          itemCount: srats.length,
+          itemBuilder: ((context, index) => Column(
+                children: [
+                  if (index == 0) SizedBox(height: 8),
+                  SratCard(srat: srats[index]),
+                  if (index == videoLessons.length - 1) SizedBox(height: 16),
+                ],
+              )),
+        ),
+         ListView.builder(
+          itemCount: lessns.length,
+          itemBuilder: ((context, index) => Column(
+                children: [
+                  if (index == 0) SizedBox(height: 8),
+                  LessnCard(lessn: lessns[index]),
+                  if (index == videoLessons.length - 1) SizedBox(height: 16),
+                ],
+              )),
+        ),
+        ListView.builder(
+          itemCount: videoLessons.length,
+          itemBuilder: ((context, index) => Column(
+                children: [
+                  if (index == 0) SizedBox(height: 8),
+                  VideoCard(videoLesson: videoLessons[index]),
+                  if (index == videoLessons.length - 1) SizedBox(height: 16)
+                ],
+              )),
+        )
+      ]),
     );
   }
 }
@@ -90,7 +133,7 @@ class PostCard extends StatelessWidget {
             tag: post.id,
             child: ZImageDisplay(
               image: post.image,
-              height: MediaQuery.of(context).size.width * .225,
+              height: MediaQuery.of(context).size.width * .4,
               width: MediaQuery.of(context).size.width,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(8),
@@ -115,6 +158,142 @@ class PostCard extends StatelessWidget {
   }
 }
 
+class AnalCard extends StatelessWidget {
+  const AnalCard({Key? key, required this.anal}) : super(key: key);
+  final Anal anal;
+
+  @override
+  Widget build(BuildContext context) {
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+    return ZCard(
+      borderRadiusColor: isLightTheme ? appColorCardBorderLight : appColorCardBorderDark,
+      onTap: () => Get.to(() => AnalDetailsPage(anal: anal), transition: Transition.cupertino, fullscreenDialog: true),
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: EdgeInsets.symmetric(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(),
+          Hero(
+            tag: anal.id,
+            child: ZImageDisplay(
+              image: anal.image,
+              height: MediaQuery.of(context).size.width * .4,
+              width: MediaQuery.of(context).size.width,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
+              ),
+            ),
+          ),
+          SizedBox(height: 8),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(anal.title),
+          ),
+          SizedBox(height: 4),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(ZFormat.dateFormatSignal(anal.analDate)),
+          ),
+          SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+}
+
+class SratCard extends StatelessWidget {
+  const SratCard({Key? key, required this.srat}) : super(key: key);
+  final Srat srat;
+
+  @override
+  Widget build(BuildContext context) {
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+    return ZCard(
+      borderRadiusColor: isLightTheme ? appColorCardBorderLight : appColorCardBorderDark,
+      onTap: () => Get.to(() => SratDetailsPage(srat: srat), transition: Transition.cupertino, fullscreenDialog: true),
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: EdgeInsets.symmetric(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(),
+          Hero(
+            tag: srat.id,
+            child: ZImageDisplay(
+              image: srat.image,
+              height: MediaQuery.of(context).size.width * .4,
+              width: MediaQuery.of(context).size.width,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
+              ),
+            ),
+          ),
+          SizedBox(height: 8),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(srat.title),
+          ),
+          SizedBox(height: 4),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(ZFormat.dateFormatSignal(srat.sratDate)),
+          ),
+          SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+}
+
+class LessnCard extends StatelessWidget {
+  const LessnCard({Key? key, required this.lessn}) : super(key: key);
+  final Lessn lessn;
+
+  @override
+  Widget build(BuildContext context) {
+    final isLightTheme = Theme.of(context).brightness == Brightness.light;
+    return ZCard(
+      borderRadiusColor: isLightTheme ? appColorCardBorderLight : appColorCardBorderDark,
+      onTap: () => Get.to(() => LessnDetailsPage(lessn: lessn), transition: Transition.cupertino, fullscreenDialog: true),
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: EdgeInsets.symmetric(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(),
+          Hero(
+            tag: lessn.id,
+            child: ZImageDisplay(
+              image: lessn.image,
+              height: MediaQuery.of(context).size.width * .4,
+              width: MediaQuery.of(context).size.width,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
+              ),
+            ),
+          ),
+          SizedBox(height: 8),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(lessn.title),
+          ),
+          SizedBox(height: 4),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(ZFormat.dateFormatSignal(lessn.lessnDate)),
+          ),
+          SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+}
+
+
 class VideoCard extends StatelessWidget {
   const VideoCard({Key? key, required this.videoLesson}) : super(key: key);
   final VideoLesson videoLesson;
@@ -133,7 +312,7 @@ class VideoCard extends StatelessWidget {
           Row(),
           ZImageDisplay(
             image: videoLesson.image,
-            height: MediaQuery.of(context).size.width * .225,
+            height: MediaQuery.of(context).size.width * .4,
             width: MediaQuery.of(context).size.width,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(8),

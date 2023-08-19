@@ -29,7 +29,8 @@ class FirebaseImageCompressService {
     var targetPath = dir.absolute.path + uuid.v1() + '.jpg';
 
     var result = await FlutterImageCompress.compressAndGetFile(file.absolute.path, targetPath, quality: 70, minWidth: 600, minHeight: 600, rotate: 0);
-    result = result ?? file;
-    return result;
+
+    if (result != null) return File(result.path);
+    return file;
   }
 }

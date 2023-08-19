@@ -39,6 +39,15 @@ class AppControlsPublic {
   @JsonKey(defaultValue: '')
   String linkPivacy;
 
+  @JsonKey(defaultValue: true)
+  bool showSignalAggrPerformance7Days;
+  @JsonKey(defaultValue: true)
+  bool showSignalAggrPerformance14Days;
+  @JsonKey(defaultValue: true)
+  bool showSignalAggrPerformance30Days;
+  @JsonKey(defaultValue: true)
+  bool showSignalAggrPerformance;
+
   AppControlsPublic()
       : id = '',
         apiWebSocketUrl = '',
@@ -56,7 +65,11 @@ class AppControlsPublic {
         linkWhatsapp = '',
         linkSupport = '',
         linkTerms = '',
-        linkPivacy = '';
+        linkPivacy = '',
+        showSignalAggrPerformance7Days = true,
+        showSignalAggrPerformance14Days = true,
+        showSignalAggrPerformance30Days = true,
+        showSignalAggrPerformance = true;
 
   factory AppControlsPublic.fromJson(Map<String, dynamic> json) => _$AppControlsPublicFromJson(json);
   Map<String, dynamic> toJson() => _$AppControlsPublicToJson(this)

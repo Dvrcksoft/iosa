@@ -24,7 +24,15 @@ AppControlsPublic _$AppControlsPublicFromJson(Map<String, dynamic> json) =>
       ..linkWhatsapp = json['linkWhatsapp'] as String? ?? ''
       ..linkSupport = json['linkSupport'] as String? ?? ''
       ..linkTerms = json['linkTerms'] as String? ?? ''
-      ..linkPivacy = json['linkPivacy'] as String? ?? '';
+      ..linkPivacy = json['linkPivacy'] as String? ?? ''
+      ..showSignalAggrPerformance7Days =
+          json['showSignalAggrPerformance7Days'] as bool? ?? true
+      ..showSignalAggrPerformance14Days =
+          json['showSignalAggrPerformance14Days'] as bool? ?? true
+      ..showSignalAggrPerformance30Days =
+          json['showSignalAggrPerformance30Days'] as bool? ?? true
+      ..showSignalAggrPerformance =
+          json['showSignalAggrPerformance'] as bool? ?? true;
 
 Map<String, dynamic> _$AppControlsPublicToJson(AppControlsPublic instance) =>
     <String, dynamic>{
@@ -45,4 +53,10 @@ Map<String, dynamic> _$AppControlsPublicToJson(AppControlsPublic instance) =>
       'linkSupport': instance.linkSupport,
       'linkTerms': instance.linkTerms,
       'linkPivacy': instance.linkPivacy,
+      'showSignalAggrPerformance7Days': instance.showSignalAggrPerformance7Days,
+      'showSignalAggrPerformance14Days':
+          instance.showSignalAggrPerformance14Days,
+      'showSignalAggrPerformance30Days':
+          instance.showSignalAggrPerformance30Days,
+      'showSignalAggrPerformance': instance.showSignalAggrPerformance,
     };

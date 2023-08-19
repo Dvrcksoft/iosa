@@ -25,7 +25,7 @@ class ApiAuthUserService {
       FirebaseAuth.instance.signOut();
 
       return true;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       log('response ${e}');
       log('response ${e.response?.data['message']}');
       return false;
@@ -50,7 +50,7 @@ class ApiAuthUserService {
       );
 
       return true;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       log('response1 ${e}');
       log('response2 ${e.response}');
       log('response3 ${e.response?.data['message']}');

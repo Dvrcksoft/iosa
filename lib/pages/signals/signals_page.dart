@@ -11,6 +11,7 @@ import 'package:signalbyt/pages/signals/signals_closed_page.dart';
 
 import '../../components/z_card.dart';
 import '../../components/z_signal_card.dart';
+import '../../components/z_signalaggr_performace_card.dart';
 import '../../constants/app_colors.dart';
 
 class SignalsPage extends StatefulWidget {
@@ -32,6 +33,9 @@ class _SignalsPageState extends State<SignalsPage> with TickerProviderStateMixin
 
   @override
   void initState() {
+    _controller = TabController(length: widget.controllerLength, vsync: this);
+    if (widget.signalsAggrOpen.length > 0) selectSignalAggrId = widget.signalsAggrOpen[0].id;
+
     _controller = TabController(length: widget.controllerLength, vsync: this);
     _controller.addListener(() {
       int index = _controller.index;
@@ -68,9 +72,10 @@ class _SignalsPageState extends State<SignalsPage> with TickerProviderStateMixin
               color: Colors.transparent,
               shadowColor: Colors.transparent,
               inkColor: Colors.transparent,
-              child: Text('Results', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900)),
+              child: Text('Results', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900)),
               margin: EdgeInsets.only(right: 16),
-              padding: EdgeInsets.zero,
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              borderRadiusColor: AppCOLORS.yellow,
             ),
           ),
         ],
@@ -86,13 +91,13 @@ class _SignalsPageState extends State<SignalsPage> with TickerProviderStateMixin
       body: TabBarView(
         controller: _controller,
         children: [
-          for (var s in widget.signalsAggrOpen) _buildList(s.signals),
+          for (var s in widget.signalsAggrOpen) _buildList(s.signals, s),
         ],
       ),
     );
   }
 
-  _buildList(List<Signal> signals) {
+  _buildList(List<Signal> signals, SignalAggrOpen signalAggrOpen) {
     if (signals.isEmpty)
       return Column(
         children: [
@@ -100,10 +105,10 @@ class _SignalsPageState extends State<SignalsPage> with TickerProviderStateMixin
           Center(child: Text('No signals available')),
         ],
       );
-    return _buildListView(signals);
+    return _buildListView(signals, signalAggrOpen);
   }
 
-  Scrollbar _buildListView(List<Signal> signals) {
+  Scrollbar _buildListView(List<Signal> signals, SignalAggrOpen signalAggrOpen) {
     ScrollController scrollController = ScrollController(initialScrollOffset: 0);
     return Scrollbar(
       controller: scrollController,
@@ -112,7 +117,10 @@ class _SignalsPageState extends State<SignalsPage> with TickerProviderStateMixin
         itemCount: signals.length,
         itemBuilder: ((context, index) => Column(
               children: [
-                if (index == 0) SizedBox(height: 4),
+                if (index == 0)
+                  Column(
+                    children: [SizedBox(height: 4), ZSignalAggrPerformaceCard(signalAggrOpen: signalAggrOpen)],
+                  ),
                 getSignalCard(signals[index]),
                 if (index == signals.length - 1) SizedBox(height: 32),
               ],
@@ -132,7 +140,7 @@ class _SignalsPageState extends State<SignalsPage> with TickerProviderStateMixin
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     AuthUser? user = authProvider.authUser;
 
-    if (user?.hasActiveSubscription == false) return ZSignalCard(signal: signal);
+    if (user?.hasActiveSubscription == true) return ZSignalCard(signal: signal);
     if (signal.isFree) return ZSignalCard(signal: signal);
 
     return ZSignalSubscribeCard(signal: signal);

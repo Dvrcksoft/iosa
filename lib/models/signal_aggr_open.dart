@@ -13,12 +13,21 @@ class SignalAggrOpen {
   num sort;
   @JsonKey(defaultValue: [], name: 'data')
   List<Signal> signals;
+  @JsonKey(name: 'performance7Days', defaultValue: null)
+  SignalAggrPerformance? performance7Days;
+  @JsonKey(name: 'performance14Days', defaultValue: null)
+  SignalAggrPerformance? performance14Days;
+  @JsonKey(name: 'performance30Days', defaultValue: null)
+  SignalAggrPerformance? performance30Days;
 
   SignalAggrOpen()
       : id = '',
         name = '',
         sort = 0,
-        signals = [];
+        signals = [],
+        performance7Days = SignalAggrPerformance(),
+        performance14Days = SignalAggrPerformance(),
+        performance30Days = SignalAggrPerformance();
 
   factory SignalAggrOpen.fromJson(Map<String, dynamic> json) => _$SignalAggrOpenFromJson(json);
   Map<String, dynamic> toJson() => _$SignalAggrOpenToJson(this)..remove('id');
@@ -205,4 +214,24 @@ class Signal {
 
     return 0;
   }
+}
+
+@JsonSerializable(explicitToJson: true)
+class SignalAggrPerformance {
+  @JsonKey(defaultValue: 0)
+  num trades;
+  @JsonKey(defaultValue: 0)
+  num profitPercentPerTrade;
+  @JsonKey(defaultValue: 0)
+  num winRate;
+
+  SignalAggrPerformance()
+      : trades = 0,
+        profitPercentPerTrade = 0,
+        winRate = 0;
+
+  factory SignalAggrPerformance.fromJson(Map<String, dynamic> json) => _$SignalAggrPerformanceFromJson(json);
+  Map<String, dynamic> toJson() => _$SignalAggrPerformanceToJson(this)
+    ..remove('id')
+    ..remove('timestampCreated');
 }

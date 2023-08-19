@@ -84,7 +84,7 @@ class Themes {
   }
 
   static void setStatusNavigationBarColor() async {
-    final brightness = WidgetsBinding.instance.window.platformBrightness;
+    final brightness = WidgetsBinding.instance.platformDispatcher.platformBrightness;
 
     bool isThemeModeSystem = await getThemeModeHive() == ThemeMode.system;
     bool isThemeModeLight = await getThemeModeHive() == ThemeMode.light;

@@ -15,7 +15,7 @@ class ApiService {
       );
       print(response.data);
       return true;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       log('response ${e}');
       log('response ${e.response?.data['message']}');
       return false;

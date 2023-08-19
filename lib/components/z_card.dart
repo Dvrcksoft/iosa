@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:signalbyt/constants/app_colors.dart';
+import 'package:signalbyt/constants/app_sizes.dart';
 
 class ZCard extends StatelessWidget {
   final Widget child;
   final BorderRadius? borderRadius;
-  final double borderWidth;
-  final Color borderRadiusColor;
+  final double? borderWidth;
+  final Color? borderRadiusColor;
   final Color? color;
   final GestureTapCallback? onTap;
   final GestureTapCallback? onDoubleTap;
@@ -20,8 +23,8 @@ class ZCard extends StatelessWidget {
     Key? key,
     required this.child,
     this.borderRadius,
-    this.borderWidth = 1,
-    this.borderRadiusColor = Colors.transparent,
+    this.borderWidth,
+    this.borderRadiusColor,
     this.color,
     this.onTap,
     this.shadowColor,
@@ -37,25 +40,28 @@ class ZCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color defaultBorderRadiusColor = context.isDarkMode ? AppCOLORS.cardBorderDark : AppCOLORS.cardBorderLight;
+    Color defaultCardColor = context.isDarkMode ? AppCOLORS.cardDark : AppCOLORS.cardLight;
     return Container(
       height: height ?? null,
       width: width ?? null,
       decoration: BoxDecoration(
-        border: Border.all(color: borderRadiusColor, width: borderWidth),
-        borderRadius: borderRadius ?? BorderRadius.circular(8),
+        color: color ?? defaultCardColor,
+        border: Border.all(color: borderRadiusColor ?? defaultBorderRadiusColor, width: borderWidth ?? AppSIZES.cardBorderWidth),
+        borderRadius: borderRadius ?? BorderRadius.circular(AppSIZES.cardRadius),
       ),
       margin: margin ?? EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Card(
         margin: EdgeInsets.all(0),
-        color: color ?? null,
+        color: color ?? defaultCardColor,
         elevation: elevation ?? 0,
-        shape: RoundedRectangleBorder(borderRadius: borderRadius ?? BorderRadius.circular(8)),
+        shape: RoundedRectangleBorder(borderRadius: borderRadius ?? BorderRadius.circular(AppSIZES.cardRadius)),
         child: InkWell(
           splashColor: inkColor ?? null,
           // splashColor: Color(0x66C8C8C8),
-          focusColor: Colors.transparent,
+          focusColor: Colors.grey.shade50,
           highlightColor: Colors.transparent,
-          borderRadius: borderRadius ?? BorderRadius.circular(16),
+          borderRadius: borderRadius ?? BorderRadius.circular(8),
           onTap: onTap ?? null,
           onDoubleTap: onDoubleTap ?? null,
           onLongPress: onLongPress ?? null,

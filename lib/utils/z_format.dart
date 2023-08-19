@@ -15,7 +15,7 @@ class ZFormat {
   }
 
   static num toPrecision(num number, int fractionDigits) {
-    if (number == double.nan) return 0;
+    if (number.isNaN) return 0;
     num mod = pow(10, fractionDigits);
     return ((number * mod).round() / mod);
   }

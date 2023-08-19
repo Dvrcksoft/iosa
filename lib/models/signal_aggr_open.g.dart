@@ -14,7 +14,19 @@ SignalAggrOpen _$SignalAggrOpenFromJson(Map<String, dynamic> json) =>
       ..signals = (json['data'] as List<dynamic>?)
               ?.map((e) => Signal.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          [];
+          []
+      ..performance7Days = json['performance7Days'] == null
+          ? null
+          : SignalAggrPerformance.fromJson(
+              json['performance7Days'] as Map<String, dynamic>)
+      ..performance14Days = json['performance14Days'] == null
+          ? null
+          : SignalAggrPerformance.fromJson(
+              json['performance14Days'] as Map<String, dynamic>)
+      ..performance30Days = json['performance30Days'] == null
+          ? null
+          : SignalAggrPerformance.fromJson(
+              json['performance30Days'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$SignalAggrOpenToJson(SignalAggrOpen instance) =>
     <String, dynamic>{
@@ -22,6 +34,9 @@ Map<String, dynamic> _$SignalAggrOpenToJson(SignalAggrOpen instance) =>
       'name': instance.name,
       'sort': instance.sort,
       'data': instance.signals.map((e) => e.toJson()).toList(),
+      'performance7Days': instance.performance7Days?.toJson(),
+      'performance14Days': instance.performance14Days?.toJson(),
+      'performance30Days': instance.performance30Days?.toJson(),
     };
 
 Signal _$SignalFromJson(Map<String, dynamic> json) => Signal()
@@ -117,4 +132,19 @@ Map<String, dynamic> _$SignalToJson(Signal instance) => <String, dynamic>{
       'timestampClosed': parseToDateTime(instance.timestampClosed),
       'timestampCreated': parseToDateTime(instance.timestampCreated),
       'timestampUpdated': parseToDateTime(instance.timestampUpdated),
+    };
+
+SignalAggrPerformance _$SignalAggrPerformanceFromJson(
+        Map<String, dynamic> json) =>
+    SignalAggrPerformance()
+      ..trades = json['trades'] as num? ?? 0
+      ..profitPercentPerTrade = json['profitPercentPerTrade'] as num? ?? 0
+      ..winRate = json['winRate'] as num? ?? 0;
+
+Map<String, dynamic> _$SignalAggrPerformanceToJson(
+        SignalAggrPerformance instance) =>
+    <String, dynamic>{
+      'trades': instance.trades,
+      'profitPercentPerTrade': instance.profitPercentPerTrade,
+      'winRate': instance.winRate,
     };

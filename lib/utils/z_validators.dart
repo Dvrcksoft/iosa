@@ -61,16 +61,11 @@ class ZValidators {
         return "Too many requests to log into this account.";
 
       case "ERROR_OPERATION_NOT_ALLOWED":
-      case "operation-not-allowed":
         return "Server error, please try again later.";
 
       case "ERROR_INVALID_EMAIL":
       case "invalid-email":
         return "Email address is invalid.";
-
-      case "ERROR_USER_NOT_FOUND":
-      case "user-not-found":
-        return "No account found with this email";
 
       default:
         return "Login failed. Please try again.";

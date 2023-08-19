@@ -18,7 +18,7 @@ import 'models_providers/navbar_provider.dart';
 import 'models_providers/theme_provider.dart';
 import 'models_services/firebase_notification_service.dart';
 import 'models_services/revenuecat_service.dart';
-import 'pages/app/splash_page.dart';
+import 'pages/_app/splash_page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:easy_localization/easy_localization.dart';
 

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
-import '../_app_navbar_page.dart';
+import '../pages/_app_navbar_page.dart';
 import '../models/auth_user.dart';
 import '../models_services/firebase_auth_service.dart';
 import '../models_services/revenuecat_service.dart';

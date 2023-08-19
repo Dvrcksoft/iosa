@@ -140,7 +140,7 @@ class _SignalsPageState extends State<SignalsPage> with TickerProviderStateMixin
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     AuthUser? user = authProvider.authUser;
 
-    if (user?.hasActiveSubscription == true) return ZSignalCard(signal: signal);
+    if (user?.hasActiveSubscription == false) return ZSignalCard(signal: signal);
     if (signal.isFree) return ZSignalCard(signal: signal);
 
     return ZSignalSubscribeCard(signal: signal);
